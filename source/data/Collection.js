@@ -748,6 +748,18 @@ enyo.kind({
 		s = this.store = s || enyo.store;
 		s.addCollection(this);
 	},
+	observers: {
+		_relationChanged: ["relation"]	
+	},
+	_relationChanged: function () {
+		var relation = this.relation;
+		
+		if (relation && this.length && (!relation.isOwner || relation.inverseKey)) {
+			enyo.forEach(this.records, function (rec) {
+				// @TODO!
+			}, this);
+		}
+	},
 	_activeFilterChanged: function () {
 		var fn = this.activeFilter,
 			m  = this.filters;
